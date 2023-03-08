@@ -1,0 +1,14 @@
+//função para fazer substituição de vários valores de uma única vez
+let
+    //tabela de exemplo
+    Source = Table.FromColumns({{"One", "2", "Three Point Five", "For", "five"}}),
+    //de-para
+    Substitutions = [
+        #"2" = "Two",
+        #"Three Point Five" = "Three",
+        For = "Four",
+        five = "Five"],
+    //substituindo os valores conforme de-para
+    Substituted = Table.TransformColumns(Source, {{"Column1", each Record.FieldOrDefault(Substitutions, _, _)}})
+in
+    Substituted
