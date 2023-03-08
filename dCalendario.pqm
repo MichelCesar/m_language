@@ -1,0 +1,26 @@
+//Função para criar dCalendario
+
+(DataInicial as date, DataFinal as date) =>
+let
+    DataInicial = #date(2021,1,1),
+    DataFinal = #date(2021,12,31),
+    QtdeDeDias = Duration.Days( DataFinal - DataInicial ) + 1,
+    Datas = List.Dates(DataInicial, QtdeDeDias, #duration(1,0,0,0)),
+    Cabecalho = type table[Data=date, Ano=Int32.Type, Dia=Int32.Type, Dia da Semana=Int32.Type,Nome do Dia=text, Nome do Mês=Int32.Type,Trimestre=Int32.Type],
+    Registros = 
+        List.Transform(
+            Datas,
+            each
+            { _,
+            Date.Year(_),
+            Date.Day(_),
+            Date.DayOfWeek(_),
+            Date.DayOfWeekName(_),
+            Date.MonthName(_),
+            Date.QuarterOfYear(_)
+            }
+        ),
+    Tabela = #table(Cabecalho, Registros)
+
+in
+    Tabela
