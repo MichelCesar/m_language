@@ -1,7 +1,9 @@
 //Função para criar dCalendario
 
+//comentar a linha abaixo caso queria usar como tabela
 (DataInicial as date, DataFinal as date) =>
 let
+    //comentar as duas primeiras linha caso queira usar como função
     DataInicial = #date(2021,1,1),
     DataFinal = #date(2021,12,31),
     QtdeDeDias = Duration.Days( DataFinal - DataInicial ) + 1,
