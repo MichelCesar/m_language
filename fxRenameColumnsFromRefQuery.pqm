@@ -1,0 +1,25 @@
+//referencia: http://biinsight.com/a-power-query-custom-function-to-rename-all-columns-at-once-in-a-table///
+(ColumnName as text) as text =>
+let
+    Source = 
+        if (
+            List.Contains(
+                Record.FieldNames(#sections[Section1]), 
+		//nome da tabela de depara//
+                "de_para"
+                ) 
+             ) = true 
+	//nome da tabela de depara//
+        then #"de_para" 
+        else null,
+    ColumnNewName = 
+        try 		    //nome da tabela de depara e da coluna DE//
+            if List.Contains(de_para[DE], ColumnName) = true 
+            then 				//nome da tabela de depara e da coluna DE e da coluna PARA//
+                if Text.Trim(Table.SelectRows(Source, each ([DE] = ColumnName)){0}[PARA]) = "" 
+                then ColumnName 	       //nome da tabela de depara e da coluna DE e da coluna PARA//
+                else Table.SelectRows(Source, each ([DE] = ColumnName)){0}[PARA] 
+            else Source 
+        otherwise ColumnName
+in
+    ColumnNewName
