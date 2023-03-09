@@ -1,0 +1,9 @@
+//https://www.myonlinetraininghub.com/searching-for-text-strings-in-power-query
+
+//Checa a partir de uma lista de palavras, se alguma dessas contém em uma célula
+
+Table.AddColumn(LISTA, "Check", 
+    (FindStrings) =>
+    List.AnyTrue(List.Transform({ //ListaComAsPalavras// } , each Text.Contains( //ColunaAserVerificada// ), _))
+    )
+)
