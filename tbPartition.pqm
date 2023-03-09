@@ -1,0 +1,8 @@
+
+//Particiona a tabela por grupos, criando um índice para cada grupo
+
+//para um grupo
+Partition = Table.Group(#"Linhas Classificadas", {"DESTINO","MES"}, {{"Index", each Table.AddIndexColumn(_, "Index",1,1), type table}}),
+
+//para mais de um grupo
+Partition = Table.Group(Fonte, {"Oferta"}, {{"Index", each Table.AddIndexColumn(_, "Index",1,1), type table},{"Contagem", each Table.RowCount(_), type number}})
