@@ -1,0 +1,9 @@
+//Função para remover espaços excessivos entre as palavras//
+(text as text) =>
+	 let
+		 char = " ",
+		 split = Text.Split(text, char),
+		 removeblanks = List.Select(split, each _ <> ""),
+		 result=Text.Combine(removeblanks, char)
+	 in
+result
